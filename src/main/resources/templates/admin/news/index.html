@@ -7,7 +7,15 @@
   <title>Admin</title>
 </head>
 <body>
-  
-  
+  <h2>ニュース</h2>
+
+  <table>
+    <tr th:each="news: ${newsList}">
+      <td><a th:href="|edit/${news.id}|">Edit</a></td>
+      <td th:text="${news.title}"></td>
+      <td th:text="${news.createdAt}"></td>
+      <td th:text="${news.updatedAt}"></td>
+    </tr>
+  </table>
 </body>
 </html>
