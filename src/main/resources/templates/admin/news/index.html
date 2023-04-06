@@ -15,7 +15,7 @@
     <a class="btn btn-sm btn-primary" th:href="create">新規追加</a>
     <table class="table">
       <tr th:each="news: ${newsList}">
-        <td><a th:href="@{/admin/news/edit/{id}(id=${news.id})}">編集</a></td>
+        <td><a th:href="@{/admin/news/edit/{id}(id=${news.id})}" class="btn btn-sm btn-outline-primary">編集</a></td>
         <td th:text="${news.title}"></td>
         <td th:text="${news.createdAt}"></td>
         <td th:text="${news.updatedAt}"></td>

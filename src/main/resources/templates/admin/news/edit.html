@@ -13,14 +13,16 @@
   <div layout:fragment="contents">
     <h2>ニュース</h2>
     <div class="mb-3">
-      <form th:action="@{/admin/news/update/{id}(id=${news.id})}" method="post">
+      <form th:action="@{/admin/news/update/{id}(id=${news.id})}" method="post" th:object="${news}">
+
         <div class="form-group mb-3">
           <label class="from-label" for="">タイトル</label>
-          <input name="title" class="form-control" th:value="${news.title}"></input>
+          <input th:field="${news.title}" class="form-control">
         </div>
+
         <div class="form-group mb-3">
           <label class="form-label" for="">本文</label>
-          <textarea name="body" class="form-control" th:utext="*{news.body}" rows="10"></textarea>
+          <textarea th:field="${news.body}" class="form-control" rows="10"></textarea>
         </div>
 
         <button class="btn btn-primary">更新</button>

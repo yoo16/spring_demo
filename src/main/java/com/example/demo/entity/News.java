@@ -1,14 +1,13 @@
 package com.example.demo.entity;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "news")
@@ -16,10 +15,13 @@ public class News {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
+
+    @NotBlank(message = "Title is required")
     private String title;
-    @NotEmpty
+
+    @NotBlank(message = "Body is required")
     private String body;
+
     private String imagePath;
     private Timestamp createdAt;
     private Timestamp updatedAt;
