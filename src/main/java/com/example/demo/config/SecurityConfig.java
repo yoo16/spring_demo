@@ -16,8 +16,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.formLogin(login -> login
-                // .loginProcessingUrl("/login")
-                .loginProcessingUrl("/auth")
+                // .loginProcessingUrl("/auth")
                 .loginPage("/login")
                 .defaultSuccessUrl("/user/")
                 .failureUrl("/login?error")

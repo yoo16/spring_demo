@@ -1,20 +1,35 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+  <title>ログインページ</title>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
+  <main class="w-50 m-auto mt-5">
+    <h2 class="text-center">ログイン</h2>
+    <p th:if="${param.error}" class="text-danger">
+      Emailまたはパスワードが違います。
+    </p>
+    <form action="index.html" th:action="@{/login}" method="post">
+      <div class="form-floating">
+        <input type="email" name="username" class="form-control border-0 border-bottom rounded-0" id="floatingInput"
+          placeholder="test@example.com">
+        <label for="floatingInput">Emailアドレス</label>
+      </div>
 
-  <form th:action="@{/auth}" method="post">
-    <div><label>Email: <input type="text" name="email" /></label></div>
-    <div><label>Password: <input type="password" name="password" /></label></div>
-    <div><input type="submit" value="Log in" /></div>
-  </form>
+      <div class="form-floating">
+        <input type="password" name="password" class="form-control border-0 border-bottom rounded-0"
+          id="floatingPassword" placeholder="パスワード">
+        <label for="floatingPassword">パスワード</label>
+      </div>
+      <div class="d-grid m-2">
+        <button class="btn btn-primary">ログイン</button>
+      </div>
+    </form>
+  </main>
 
 </body>
 

@@ -18,7 +18,7 @@ public class NewsController {
         String message = "News is " + id;
         return message;
     }
-
+    
     @GetMapping("/news/search")
     public String search(@RequestParam("keyword") String keyword) {
         return "Keyword is " + keyword;
