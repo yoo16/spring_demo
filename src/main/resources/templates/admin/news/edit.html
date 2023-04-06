@@ -1,24 +1,38 @@
 <!DOCTYPE html>
-<xmlns:th="http: //www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="layouts/default">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+</head>
 
-  <body>
-    <div layout:fragment="contents">
-      <form th:action="@{../update/{id}(id=${news.id})}" method="post">
-        <h2>ニュース</h2>
-        <input name="title" class="form-control" th:value="${news.title}"></input>
-        <textarea name="body" class="form-control" th:utext="*{news.body}" rows="10"></textarea>
+<body>
+  <div layout:fragment="contents">
+    <h2>ニュース</h2>
+    <div class="mb-3">
+      <form th:action="@{/admin/news/update/{id}(id=${news.id})}" method="post">
+        <div class="form-group mb-3">
+          <label class="from-label" for="">タイトル</label>
+          <input name="title" class="form-control" th:value="${news.title}"></input>
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label" for="">本文</label>
+          <textarea name="body" class="form-control" th:utext="*{news.body}" rows="10"></textarea>
+        </div>
 
         <button class="btn btn-primary">更新</button>
+        <a class="btn btn-outline-primary" th:href="@{../}">戻る</a>
       </form>
     </div>
-  </body>
+    <div class="mb-3">
+      <form th:action="@{/admin/news/destroy/{id}(id=${news.id})}" method="post">
+        <button class="btn btn-danger" onclick="return confirm('削除してもよいですか？')">削除</button>
+      </form>
+    </div>
+  </div>
+</body>
 
-  </html>
+</html>

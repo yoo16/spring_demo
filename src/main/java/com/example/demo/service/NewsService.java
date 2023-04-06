@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,19 @@ public class NewsService {
         return repository.findAll();
     }
 
-    // TODO: not found
     public News getById(Long id) {
         return repository.findById(id).get();
+    }
+
+    public News create(News form) {
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+
+        News news = new News();
+        news.setTitle(form.getTitle());
+        news.setBody(form.getBody());
+        news.setCreatedAt(now);
+        repository.saveAndFlush(news);
+        return news;
     }
 
     public News update(Long id, News form) {
@@ -40,4 +49,9 @@ public class NewsService {
         return news;
     }
 
+    public News delete(Long id) {
+        News news = getById(id);
+        repository.delete(news);
+        return news;
+    }
 }
