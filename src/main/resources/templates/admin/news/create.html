@@ -12,15 +12,18 @@
 <body>
   <div layout:fragment="contents">
     <h2>ニュース</h2>
-    <form th:action="@{add}" method="post">
+
+    <form th:action="@{add}" method="post" th:object="${form}">
 
       <div class="form-group mb-3">
         <label class="from-label" for="">タイトル</label>
+        <span class="small text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span>
         <input th:field="${news.title}" class="form-control">
       </div>
 
       <div class="form-group mb-3">
         <label class="form-label" for="">本文</label>
+        <span class="small text-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}">Title Error</span>
         <textarea th:field="${news.body}" class="form-control" rows="10"></textarea>
       </div>
 

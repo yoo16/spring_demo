@@ -1,7 +1,10 @@
 package com.example.demo.controllers.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +25,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/admin/news/")
 public class NewsController {
 
+    Logger logger = LoggerFactory.getLogger(NewsController.class);
+
     @Autowired
     private NewsService service;
 
@@ -40,10 +45,14 @@ public class NewsController {
 
     @PostMapping("add")
     public String add(@Valid @ModelAttribute("form") News form, BindingResult bindingResult,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("form", form);
-            return "redirect:/admin/news/create";
+            model.addAttribute("news", form);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.news",
+            bindingResult);
+            return "admin/news/create";
+            // return "redirect:/admin/news/create";
         } else {
             service.create(form);
             return "redirect:/admin/news/";
@@ -62,6 +71,7 @@ public class NewsController {
             RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("form", form);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.news", bindingResult);
             return "redirect:/admin/news/edit/" + id;
         } else {
             service.update(id, form);

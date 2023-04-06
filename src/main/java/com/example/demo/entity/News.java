@@ -16,10 +16,10 @@ public class News {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Title is required")
+    @NotBlank(message = "タイトルを入力してください")
     private String title;
 
-    @NotBlank(message = "Body is required")
+    @NotBlank(message = "本文を入力してください")
     private String body;
 
     private String imagePath;
