@@ -5,17 +5,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.User;
-import com.example.demo.service.UserService;
+import com.example.demo.entity.News;
+import com.example.demo.service.NewsService;
 
-@RestController("ApiUserController")
-@RequestMapping("/api/user")
-public class UserController {
+@RestController("ApiNewsController")
+@RequestMapping("/api/news")
+public class NewsController {
     @Autowired
-    private UserService userService;
+    private NewsService service;
 
     @GetMapping(path = "/all")
-    public Iterable<User> getAllUsers() {
-        return userService.getAllUsers();
+    public Iterable<News> getAll() {
+        return service.getAll();
     }
 }

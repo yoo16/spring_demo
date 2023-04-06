@@ -14,11 +14,8 @@ public class HomeController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    protected static Logger log = LoggerFactory.getLogger(HomeController.class);
-
     @GetMapping("/")
     public String index(Model model) {
-        log.info(passwordEncoder.encode("password"));
         model.addAttribute("title", "Top");
         return "home/index";
     }

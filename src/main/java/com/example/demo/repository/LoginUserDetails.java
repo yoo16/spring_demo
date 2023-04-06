@@ -9,15 +9,12 @@ import com.example.demo.entity.User;
 
 public class LoginUserDetails implements UserDetails {
 
-    private User user;
-    private Collection<? extends GrantedAuthority> authorities;
+    private final User user;
+    private final Collection<? extends GrantedAuthority> authorities;
 
-    public LoginUserDetails(User user) {
+    public LoginUserDetails(User user, Collection<? extends GrantedAuthority> authorities) {
         this.user = user;
-        // this.authorities = user.getRoleList()
-        //         .stream()
-        //         .map(role -> new SimpleGrantedAuthority(role))
-        //         .toList();
+        this.authorities = authorities;
     }
 
     public User getLoginUser() {

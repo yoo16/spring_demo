@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
@@ -29,16 +30,6 @@ public class User implements UserDetails {
     private String rememberToken;
     private Date createdAt;
     private Date updatedAt;
-    // private List<String> roleList;
-    // private Authority authority;
-
-    // public List<String> getRoleList() {
-    //     return roleList;
-    // }
-
-    // public void setRoleList(List<String> roleList) {
-    //     this.roleList = roleList;
-    // }
 
     public enum Authority {
         ROLE_USER, ROLE_ADMIN
@@ -122,7 +113,7 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        // authorities.add(new SimpleGrantedAuthority(authority.toString()));
+        authorities.add(new SimpleGrantedAuthority("USER"));
         return authorities;
     }
 

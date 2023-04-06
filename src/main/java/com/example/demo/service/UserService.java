@@ -16,24 +16,14 @@ public class UserService {
     protected static Logger log = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     public User saveUser(User user) {
-        return userRepository.save(user);
+        return repository.save(user);
     }
 
     public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public boolean authenticate(String email, String password) {
-        log.info("UserService authenticate");
-        return false;
-        // if (email.equals("email") && password.equals("password")) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
+        return repository.findAll();
     }
 
 }
