@@ -13,7 +13,7 @@
   <div layout:fragment="contents">
     <h2>ニュース</h2>
     <div class="mb-3">
-      <form th:action="@{/admin/news/update/{id}(id=${news.id})}" method="post" th:object="${news}">
+      <form th:action="@{/admin/news/update/{id}(id=${news.id})}" method="post" th:object="${news}" enctype="multipart/form-data">
 
         <div class="form-group mb-3">
           <label class="from-label" for="">タイトル</label>
@@ -23,6 +23,12 @@
         <div class="form-group mb-3">
           <label class="form-label" for="">本文</label>
           <textarea th:field="${news.body}" class="form-control" rows="10"></textarea>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="">画像</label>
+          <span class="small text-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}">Title Error</span>
+          <input type="file" name="file">
         </div>
 
         <button class="btn btn-primary">更新</button>

@@ -1,7 +1,13 @@
 package com.example.demo.controllers.admin;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +20,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.News;
@@ -50,7 +58,7 @@ public class NewsController {
             redirectAttributes.addFlashAttribute("form", form);
             model.addAttribute("news", form);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.news",
-            bindingResult);
+                    bindingResult);
             return "admin/news/create";
             // return "redirect:/admin/news/create";
         } else {
@@ -67,14 +75,37 @@ public class NewsController {
     }
 
     @PostMapping("update/{id}")
-    public String update(@PathVariable("id") Long id, @Valid @ModelAttribute News form, BindingResult bindingResult,
-            RedirectAttributes redirectAttributes) {
+    public String update(
+            @PathVariable("id") Long id,
+            @Valid @ModelAttribute News form,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
+            Model model,
+            @RequestParam("file") MultipartFile filePart)
+            throws IOException {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("form", form);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.news", bindingResult);
-            return "redirect:/admin/news/edit/" + id;
+            model.addAttribute("news", form);
+            return "/admin/news/edit";
+            // redirectAttributes.addFlashAttribute("form", form);
+            // redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.news",
+            // bindingResult);
+            // return "redirect:/admin/news/edit/" + id;
         } else {
-            service.update(id, form);
+            News news = service.update(id, form);
+
+            // TODO: service
+            String imageDir = "./src/main/resources/static/images/news/";
+            String fileName = filePart.getOriginalFilename();
+            if (fileName != null) {
+                String ext = fileName.split("\\.")[1];
+                String imageFilePath = imageDir + news.getId() + "." + ext;
+                Path filePath = Paths.get(imageFilePath);
+                System.out.println(imageFilePath);
+                try {
+                    Files.copy(filePart.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                }
+            }
             return "redirect:/admin/news/";
         }
     }
