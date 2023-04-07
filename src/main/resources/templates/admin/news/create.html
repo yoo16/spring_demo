@@ -1,39 +1,29 @@
-<!DOCTYPE html>
-<html layout:decorate="layouts/admin">
+<div layout:decorate="layouts/admin" layout:fragment="contents">
+  <h2>ニュース</h2>
 
-<head>
-</head>
+  <form th:action="@{add}" th:object="${form}" method="post" enctype="multipart/form-data">
 
-<body>
-  <div layout:fragment="contents">
-    <h2>ニュース</h2>
+    <div class="form-group mb-3">
+      <label class="from-label" for="">タイトル</label>
+      <span class="small text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span>
+      <input th:field="${news.title}" class="form-control">
+    </div>
 
-    <form th:action="@{add}" th:object="${form}" method="post" enctype="multipart/form-data">
+    <div class="form-group mb-3">
+      <label class="form-label" for="">本文</label>
+      <span class="small text-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}">Title Error</span>
+      <textarea th:field="${news.body}" class="form-control" rows="10"></textarea>
+    </div>
 
-      <div class="form-group mb-3">
-        <label class="from-label" for="">タイトル</label>
-        <span class="small text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span>
-        <input th:field="${news.title}" class="form-control">
+    <div class="form-group mb-3">
+      <label class="form-label" for="">画像</label>
+      <div>
+        <img th:src="${news.imagePath}" width="500">
       </div>
+      <input type="file" name="file">
+    </div>
 
-      <div class="form-group mb-3">
-        <label class="form-label" for="">本文</label>
-        <span class="small text-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}">Title Error</span>
-        <textarea th:field="${news.body}" class="form-control" rows="10"></textarea>
-      </div>
-
-      <div class="form-group mb-3">
-        <label class="form-label" for="">画像</label>
-        <div>
-          <img th:src="${news.imagePath}" width="500">
-        </div>
-        <input type="file" name="file">
-      </div>
-
-      <button class="btn btn-primary">更新</button>
-      <a class="btn btn-outline-primary" th:href="@{/admin/news/}">戻る</a>
-    </form>
-  </div>
-</body>
-
-</html>
+    <button class="btn btn-primary">更新</button>
+    <a class="btn btn-outline-primary" th:href="@{/admin/news/}">戻る</a>
+  </form>
+</div>
