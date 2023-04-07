@@ -18,7 +18,7 @@ public class SecurityConfig {
         http.formLogin(login -> login
                 // .loginProcessingUrl("/auth")
                 .loginPage("/login")
-                .defaultSuccessUrl("/user/")
+                .defaultSuccessUrl("/admin/")
                 .failureUrl("/login?error")
                 .permitAll()
         ).logout(logout -> logout
@@ -27,7 +27,8 @@ public class SecurityConfig {
                 // static contents
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .requestMatchers("/").permitAll()
-                .requestMatchers("/user").hasRole("USER")
+                // .requestMatchers("/user").hasRole("USER")
+                .requestMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
         );
         return http.build();
