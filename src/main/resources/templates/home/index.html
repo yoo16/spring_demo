@@ -3,19 +3,19 @@
   <head>
   </head>
 <body>
-  <div layout:fragment="contents">
+  <main layout:fragment="contents">
     <div>
-      <img src="images/tokyo_station.jpg" class="img-fluid">
+      <img th:src="@{images/tokyo_station.jpg}" class="img-fluid">
     </div>
     <div>
-      <h2>ニュース</h2>
+      <h2>最新ニュース</h2>
       <ul class="list-group">
         <li class="list-group-item"><a th:href="@{/news/detail/1}">ニュース1</a></li>
         <li class="list-group-item"><a th:href="@{/news/detail/2}">ニュース2</a></li>
         <li class="list-group-item"><a th:href="@{/news/detail/3}">ニュース3</a></li>
       </ul>
     </div>
-  </div>
+  </main>
 </body>
 
 </html>
