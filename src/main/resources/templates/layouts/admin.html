@@ -25,16 +25,19 @@
           <li class="nav-item">
             <a class="nav-link" th:href="@{/admin/news/}">News</a>
           </li>
+        </ul>
+        <form class="d-flex" method="post" action="index.html" th:action="@{/logout}">
+          <button class="btn btn-sm btn-outline-primary" type="submit"
+            onclick="return confirm('ログアウトしますか？')">ログアウト</button>
+        </form>
       </div>
     </div>
   </nav>
 
-  <main>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div layout:fragment="contents"></div>
-        </div>
+  <main class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div layout:fragment="contents"></div>
       </div>
     </div>
   </main>

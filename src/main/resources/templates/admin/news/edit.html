@@ -25,7 +25,6 @@
 
         <div class="form-group mb-3">
           <label class="form-label" for="">画像</label>
-          <span class="small text-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}">Title Error</span>
           <div>
             <img th:src="${news.imagePath}" width="500">
           </div>

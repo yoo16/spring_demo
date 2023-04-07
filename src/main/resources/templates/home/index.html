@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="layouts/default">
+<html layout:decorate="layouts/default">
   <head>
-    <title></title>
   </head>
 <body>
   <div layout:fragment="contents">
@@ -12,9 +10,9 @@
     <div>
       <h2>ニュース</h2>
       <ul class="list-group">
-        <li class="list-group-item">ニュース1</li>
-        <li class="list-group-item">ニュース2</li>
-        <li class="list-group-item">ニュース3</li>
+        <li class="list-group-item"><a th:href="@{/news/detail/1}">ニュース1</a></li>
+        <li class="list-group-item"><a th:href="@{/news/detail/2}">ニュース2</a></li>
+        <li class="list-group-item"><a th:href="@{/news/detail/3}">ニュース3</a></li>
       </ul>
     </div>
   </div>

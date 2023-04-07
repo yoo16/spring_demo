@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="ja">
 
 <head>
   <title>ログインページ</title>
@@ -13,7 +13,7 @@
     <p th:if="${param.error}" class="text-danger">
       Emailまたはパスワードが違います。
     </p>
-    <form action="index.html" th:action="@{/login}" method="post">
+    <form th:action="@{/auth}" method="post">
       <div class="form-floating">
         <input type="email" name="username" class="form-control border-0 border-bottom rounded-0" id="floatingInput"
           placeholder="test@example.com">
