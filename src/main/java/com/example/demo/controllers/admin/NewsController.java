@@ -1,13 +1,6 @@
 package com.example.demo.controllers.admin;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +46,8 @@ public class NewsController {
 
     @PostMapping("add")
     public String add(@Valid @ModelAttribute("form") News form, BindingResult bindingResult,
-            RedirectAttributes redirectAttributes, Model model) {
+            RedirectAttributes redirectAttributes, Model model,
+            @RequestParam("file") MultipartFile filePart) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("form", form);
             model.addAttribute("news", form);
@@ -62,7 +56,8 @@ public class NewsController {
             return "admin/news/create";
             // return "redirect:/admin/news/create";
         } else {
-            service.create(form);
+            News news = service.create(form);
+            service.uploadImage(news, filePart);
             return "redirect:/admin/news/";
         }
     }
@@ -81,8 +76,7 @@ public class NewsController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             Model model,
-            @RequestParam("file") MultipartFile filePart)
-            throws IOException {
+            @RequestParam("file") MultipartFile filePart) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("news", form);
             return "/admin/news/edit";
@@ -92,20 +86,7 @@ public class NewsController {
             // return "redirect:/admin/news/edit/" + id;
         } else {
             News news = service.update(id, form);
-
-            // TODO: service
-            String imageDir = "./src/main/resources/static/images/news/";
-            String fileName = filePart.getOriginalFilename();
-            if (fileName != null) {
-                String ext = fileName.split("\\.")[1];
-                String imageFilePath = imageDir + news.getId() + "." + ext;
-                Path filePath = Paths.get(imageFilePath);
-                System.out.println(imageFilePath);
-                try {
-                    Files.copy(filePart.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-                } catch (IOException e) {
-                }
-            }
+            service.uploadImage(news, filePart);
             return "redirect:/admin/news/";
         }
     }
