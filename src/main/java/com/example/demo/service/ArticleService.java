@@ -9,11 +9,15 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.Article;
 import com.example.demo.repository.ArticleRepository;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 @Service
 public class ArticleService {
@@ -24,17 +28,35 @@ public class ArticleService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     public Article save(Article article) {
         return repository.save(article);
     }
 
     public List<Article> getAll() {
-        return repository.findAll();
+        return repository.findAll(
+                Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
     public Article getById(Long id) {
         Article article = repository.findById(id).get();
         return article;
+    }
+
+    public List<Article> getLatest(int limit) {
+        String sql = "SELECT e FROM Article e ORDER BY e.createdAt DESC";
+        return entityManager.createQuery(sql, Article.class)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
+    public List<Article> search(String keyword) {
+        String sql = "SELECT e FROM Article e WHERE e.body LIKE :keyword";
+        return entityManager.createQuery(sql, Article.class)
+                .setParameter("keyword", "%" + keyword + "%")
+                .getResultList();
     }
 
     public Article create(Article form) {

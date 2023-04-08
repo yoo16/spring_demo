@@ -1,7 +1,7 @@
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Andre Rosenbaum', 'mhyatt@example.net', '2020-08-16 12:41:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'UoVHE2oDoO', '2020-08-16 12:41:43', '2020-08-16 12:41:43'),
-(2, 'Lukas White', 'ooreilly@example.org', '2020-08-16 12:41:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '5btoel7t6h', '2020-08-16 12:41:43', '2020-08-16 12:41:43'),
+(1, 'Andre Rosenbaum', 'test1@test.com', '2020-08-16 12:41:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'UoVHE2oDoO', '2020-08-16 12:41:43', '2020-08-16 12:41:43'),
+(2, 'Lukas White', 'test2@test.com', '2020-08-16 12:41:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '5btoel7t6h', '2020-08-16 12:41:43', '2020-08-16 12:41:43'),
 (3, 'Hilton Brakus II', 'ole09@example.org', '2020-08-16 12:41:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'QLe41ISG8F', '2020-08-16 12:41:43', '2020-08-16 12:41:43'),
 (4, 'Yazmin Powlowski MD', 'braden.thiel@example.net', '2020-08-16 12:41:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'vpN4BTJDEv', '2020-08-16 12:41:43', '2020-08-16 12:41:43'),
 (5, 'Kenton Dietrich', 'gschneider@example.com', '2020-08-16 12:41:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'dgIxg5dMSJ', '2020-08-16 12:41:43', '2020-08-16 12:41:43'),
