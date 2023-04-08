@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class NewsController {
+public class ArticleController {
 
-    @GetMapping("/news/")
+    @GetMapping("/article/")
     public String index() {
         return "This is News Page";
     }
 
-    @GetMapping("/news/{id}")
+    @GetMapping("/article/{id}")
     public String detail(@PathVariable("id") Long id) {
         String message = "News is " + id;
         return message;
     }
     
-    @GetMapping("/news/search")
+    @GetMapping("/article/search")
     public String search(@RequestParam("keyword") String keyword) {
         return "Keyword is " + keyword;
     }

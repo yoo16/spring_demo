@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS news;
+DROP TABLE IF EXISTS articles;
 
 CREATE TABLE users (
     id bigint PRIMARY KEY AUTO_INCREMENT,
@@ -12,7 +12,7 @@ CREATE TABLE users (
     updated_at datetime NULL DEFAULT NULL
 );
 
-CREATE TABLE news (
+CREATE TABLE articles (
     id bigint PRIMARY KEY AUTO_INCREMENT,
     title varchar(255) NOT NULL,
     body TEXT NOT NULL,

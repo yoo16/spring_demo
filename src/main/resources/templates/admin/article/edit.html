@@ -1,25 +1,25 @@
 <div layout:decorate="layouts/admin" layout:fragment="contents">
   <h2>ニュース</h2>
   <div class="mb-3">
-    <form th:action="@{/admin/news/update/{id}(id=${news.id})}" method="post" th:object="${news}"
+    <form th:action="@{/admin/article/update/{id}(id=${article.id})}" method="post" th:object="${article}"
       enctype="multipart/form-data">
 
       <div class="form-group mb-3">
         <label class="from-label" for="">タイトル</label>
         <span class="small text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span>
-        <input th:field="${news.title}" class="form-control">
+        <input th:field="${article.title}" class="form-control">
       </div>
 
       <div class="form-group mb-3">
         <label class="form-label" for="">本文</label>
         <span class="small text-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}">Title Error</span>
-        <textarea th:field="${news.body}" class="form-control" rows="10"></textarea>
+        <textarea th:field="${article.body}" class="form-control" rows="10"></textarea>
       </div>
 
       <div class="form-group mb-3">
         <label class="form-label" for="">画像</label>
         <div>
-          <img th:src="${news.imagePath}" width="500">
+          <img th:src="${article.imagePath}" width="500">
         </div>
         <input type="file" name="file">
       </div>
@@ -29,7 +29,7 @@
     </form>
   </div>
   <div class="mb-3">
-    <form th:action="@{/admin/news/destroy/{id}(id=${news.id})}" method="post">
+    <form th:action="@{/admin/article/destroy/{id}(id=${article.id})}" method="post">
       <button class="btn btn-danger" onclick="return confirm('削除してもよいですか？')">削除</button>
     </form>
   </div>

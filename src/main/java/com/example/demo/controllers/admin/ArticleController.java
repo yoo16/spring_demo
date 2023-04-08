@@ -17,83 +17,83 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.entity.News;
-import com.example.demo.service.NewsService;
+import com.example.demo.entity.Article;
+import com.example.demo.service.ArticleService;
 
 import jakarta.validation.Valid;
 
-@Controller("AdminNewsController")
-@RequestMapping("/admin/news/")
-public class NewsController {
+@Controller("AdminArticleController")
+@RequestMapping("/admin/article/")
+public class ArticleController {
 
-    Logger logger = LoggerFactory.getLogger(NewsController.class);
+    Logger logger = LoggerFactory.getLogger(ArticleController.class);
 
     @Autowired
-    private NewsService service;
+    private ArticleService service;
 
     @GetMapping("")
     public String index(Model model) {
-        List<News> newsList = service.getAll();
-        model.addAttribute("newsList", newsList);
-        return "admin/news/index";
+        List<Article> articles = service.getAll();
+        model.addAttribute("articles", articles);
+        return "admin/article/index";
     }
 
     @GetMapping("create")
-    public String create(@ModelAttribute("form") News form, Model model) {
-        model.addAttribute("news", form);
-        return "admin/news/create";
+    public String create(@ModelAttribute("form") Article form, Model model) {
+        model.addAttribute("article", form);
+        return "admin/article/create";
     }
 
     @PostMapping("add")
-    public String add(@Valid @ModelAttribute("form") News form, BindingResult bindingResult,
+    public String add(@Valid @ModelAttribute("form") Article form, BindingResult bindingResult,
             RedirectAttributes redirectAttributes, Model model,
             @RequestParam("file") MultipartFile filePart) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("form", form);
-            model.addAttribute("news", form);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.news",
+            model.addAttribute("article", form);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.article",
                     bindingResult);
-            return "admin/news/create";
-            // return "redirect:/admin/news/create";
+            return "admin/article/create";
+            // return "redirect:/admin/article/create";
         } else {
-            News news = service.create(form);
-            service.uploadImage(news, filePart);
-            return "redirect:/admin/news/";
+            Article article = service.create(form);
+            service.uploadImage(article, filePart);
+            return "redirect:/admin/article/";
         }
     }
 
     @GetMapping("edit/{id}")
     public String edit(@PathVariable("id") Long id, Model model) {
-        News news = service.getById(id);
-        model.addAttribute("news", news);
-        return "admin/news/edit";
+        Article article = service.getById(id);
+        model.addAttribute("article", article);
+        return "admin/article/edit";
     }
 
     @PostMapping("update/{id}")
     public String update(
             @PathVariable("id") Long id,
-            @Valid @ModelAttribute News form,
+            @Valid @ModelAttribute Article form,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             Model model,
             @RequestParam("file") MultipartFile filePart) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("news", form);
-            return "/admin/news/edit";
+            model.addAttribute("article", form);
+            return "/admin/article/edit";
             // redirectAttributes.addFlashAttribute("form", form);
-            // redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.news",
+            // redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.article",
             // bindingResult);
-            // return "redirect:/admin/news/edit/" + id;
+            // return "redirect:/admin/article/edit/" + id;
         } else {
-            News news = service.update(id, form);
-            service.uploadImage(news, filePart);
-            return "redirect:/admin/news/";
+            Article article = service.update(id, form);
+            service.uploadImage(article, filePart);
+            return "redirect:/admin/article/";
         }
     }
 
     @PostMapping("destroy/{id}")
     public String destroy(@PathVariable("id") Long id) {
         service.delete(id);
-        return "redirect:/admin/news/";
+        return "redirect:/admin/article/";
     }
 }
