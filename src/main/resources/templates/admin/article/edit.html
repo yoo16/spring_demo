@@ -13,7 +13,9 @@
       <div class="form-group mb-3">
         <label class="form-label" for="">本文</label>
         <span class="small text-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}">Title Error</span>
-        <textarea th:field="${article.body}" class="form-control" rows="10"></textarea>
+        <textarea th:field="${article.body}" class="form-control" rows="10">
+          <span th:text="${article.body}" th:remove="tag"></span>
+        </textarea>
       </div>
 
       <div class="form-group mb-3">

@@ -73,6 +73,7 @@ public class ArticleService {
 
         Timestamp now = new Timestamp(System.currentTimeMillis());
         article.setUpdatedAt(now);
+
         repository.saveAndFlush(article);
         return article;
     }

@@ -43,7 +43,7 @@ public class Article {
     }
 
     public void setBody(String body) {
-        this.body = body;
+        this.body = body.replace("&nbsp", "\n");
     }
 
     public String getImagePath() {
