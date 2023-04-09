@@ -27,6 +27,9 @@ public class SecurityConfig {
                 // static contents
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .requestMatchers("/").permitAll()
+                .requestMatchers("/hello/**").permitAll()
+                .requestMatchers("/article/**").permitAll()
+                .requestMatchers("/article/detail/**").permitAll()
                 .requestMatchers("/api/article/**").permitAll()
                 .requestMatchers("/api/article/**?").permitAll()
                 .requestMatchers("/admin").hasRole("ADMIN")

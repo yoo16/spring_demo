@@ -1,0 +1,10 @@
+<div layout:decorate="layouts/default" layout:fragment="contents">
+  <h2>ニュース</h2>
+  <div class="mb-3">
+    <h3 th:text="${article.title}"></h3>
+    <div>
+      <img th:src="${article.imagePath}" width="500">
+    </div>
+    <div th:field="${article.body}"></div>
+  </div>
+</div>

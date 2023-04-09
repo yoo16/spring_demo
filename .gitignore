@@ -1,6 +1,6 @@
 HELP.md
 target/
-**/src/main/**/*.png
+/src/main/resources/static/images/article/*
 .DS_Store
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
