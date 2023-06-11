@@ -2,6 +2,9 @@
   <h2>ニュース</h2>
   <div class="mb-3">
     <h3 th:text="${article.title}"></h3>
+    <p>
+      <span th:text="${#dates.format(article.createdAt, 'yyyy/MM/dd HH:mm')}"></span>
+    </p>
     <div>
       <img th:src="${article.imagePath}" width="500">
     </div>
@@ -9,6 +12,10 @@
       <th:block th:each="line: ${article.body.split('\r?\n')}">
         <th:block th:text="${line}" /><br />
       </th:block>
+    </div>
+
+    <div class="d-flex mt-3 justify-content-end">
+      <a th:href="@{/article/}">ニュース一覧</a>
     </div>
   </div>
 </div>
