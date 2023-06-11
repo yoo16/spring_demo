@@ -64,12 +64,13 @@ public class ArticleService {
         return articles;
     }
 
-    public Page<Article> getPage(int offset, int limit) {
-        Pageable pageable = PageRequest.of(offset, limit, Sort.by(Sort.Direction.DESC, "createdAt"));
+    public Page<Article> getPage(Pageable pageable, int limit) {
+        int offset = pageable.getPageNumber() - 1;
+        if (offset < 0) offset = 0;
+        pageable = PageRequest.of(offset, limit, Sort.by(Sort.Direction.DESC, "createdAt"));
         Page<Article> articles = repository.findAll(pageable);
         return articles;
     }
-
 
     public long getCount() {
         long count = repository.count();

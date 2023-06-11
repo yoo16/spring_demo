@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,7 @@ public class ArticleController {
             ModelAndView model,
             Pageable pageable) {
 
-        Page<Article> articles = service.getPage(pageable);
-        articles.getTotalPages();
+        Page<Article> articles = service.getPage(pageable, ARTICLE_LIMIT);
         model.addObject("articles", articles);
         model.setViewName("article/index");
         return model;
