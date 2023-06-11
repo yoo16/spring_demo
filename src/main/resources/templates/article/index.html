@@ -4,4 +4,19 @@
     <a th:href="@{/article/{id}(id=${article.id})}" th:text="${article.title}"></a>
     (<span th:text="${#dates.format(article.createdAt, 'yyyy/MM/dd')}"></span>)
   </div>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li th:class="page-item">
+        <a th:href="@{/article/?page=1}" class="page-link">&lt;&lt;</a>
+      </li>
+      <li th:class="page-item" th:each="i : ${#numbers.sequence(0, articles.getTotalPages() - 1)}">
+        <a th:href="@{/article/?page={page}(page=${i + 1})}" class="page-link"><span th:text="${i + 1}"></span></a>
+      </li>
+      <li th:class="page-item">
+        <a th:href="@{/article/?page={page}(page=${articles.getTotalPages()})}"
+          class="page-link">&gt;&gt;</a>
+      </li>
+    </ul>
+  </nav>
 </div>

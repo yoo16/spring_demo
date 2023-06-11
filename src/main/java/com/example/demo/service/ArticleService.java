@@ -59,10 +59,21 @@ public class ArticleService {
                 .getResultList();
     }
 
+    public Page<Article> getPage(Pageable pageable) {
+        Page<Article> articles = repository.findAll(pageable);
+        return articles;
+    }
+
     public Page<Article> getPage(int offset, int limit) {
         Pageable pageable = PageRequest.of(offset, limit, Sort.by(Sort.Direction.DESC, "createdAt"));
         Page<Article> articles = repository.findAll(pageable);
         return articles;
+    }
+
+
+    public long getCount() {
+        long count = repository.count();
+        return count;
     }
 
     public List<Article> search(String keyword) {
