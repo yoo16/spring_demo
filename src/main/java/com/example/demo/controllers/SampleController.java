@@ -12,4 +12,5 @@ public class SampleController {
         String message = "Hello, " + name;
         return message;
     }
+
 }

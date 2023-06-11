@@ -45,6 +45,10 @@ public class ArticleService {
         return article;
     }
 
+    public List<Article> getArticlesByTitle(String title) {
+        return repository.findByTitle(title);
+    }
+
     public List<Article> getLatest(int limit) {
         String sql = "SELECT e FROM Article e ORDER BY e.createdAt DESC";
         return entityManager.createQuery(sql, Article.class)

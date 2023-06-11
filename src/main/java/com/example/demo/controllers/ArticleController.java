@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.entity.Article;
 import com.example.demo.service.ArticleService;
@@ -19,17 +20,19 @@ public class ArticleController {
     private ArticleService service;
 
     @GetMapping("/article/")
-    public String index(Model model) {
+    public ModelAndView index(ModelAndView model) {
         List<Article> articles = service.getAll();
-        model.addAttribute("articles", articles);
-        return "article/index";
+        model.addObject("articles", articles);
+        model.setViewName("article/index");
+        return model;
     }
 
     @GetMapping("/article/{id}")
-    public String detail(@PathVariable("id") Long id, Model model) {
+    public ModelAndView detail(@PathVariable("id") Long id, ModelAndView model) {
         Article article = service.getById(id);
-        model.addAttribute("article", article);
-        return "article/detail";
+        model.addObject("article", article);
+        model.setViewName("article/index");
+        return model;
     }
     
     @GetMapping("/article/search")

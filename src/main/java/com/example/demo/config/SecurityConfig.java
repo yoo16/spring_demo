@@ -26,13 +26,11 @@ public class SecurityConfig {
         ).authorizeHttpRequests(authz -> authz
                 // static contents
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/").permitAll()
-                .requestMatchers("/hello/**").permitAll()
-                .requestMatchers("/article/**").permitAll()
-                .requestMatchers("/api/article/**").permitAll()
-                .requestMatchers("/api/article/**?").permitAll()
-                .requestMatchers("/admin").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                .requestMatchers("/admin/**").authenticated()
+                .anyRequest().permitAll()
+                // .requestMatchers("/admin").hasRole("ADMIN")
+                // .requestMatchers("/", "/hello/**", "/article/**", "/api/article/**").permitAll()
+                // .anyRequest().authenticated()
         );
         return http.build();
     }

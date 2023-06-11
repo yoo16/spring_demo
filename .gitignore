@@ -1,10 +1,10 @@
 HELP.md
 target/
-/src/main/resources/static/images/article/*
-.DS_Store
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+
+src/main/resources/static/images/article/*
 
 ### STS ###
 .apt_generated
