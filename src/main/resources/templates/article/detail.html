@@ -1,9 +1,6 @@
 <div layout:decorate="layouts/default" layout:fragment="contents">
   <h2>ニュース</h2>
   <div class="mb-3">
-    <a th:href="@{/article/}">ニュース一覧</a>
-  </div>
-  <div class="mb-3">
     <h3 th:text="${article.title}"></h3>
     <div>
       <img th:src="${article.imagePath}" width="500">
@@ -13,8 +10,5 @@
         <th:block th:text="${line}" /><br />
       </th:block>
     </div>
-  </div>
-  <div class="mb-3">
-    <a th:href="@{/article/}">ニュース一覧</a>
   </div>
 </div>

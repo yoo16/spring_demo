@@ -9,6 +9,9 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,6 +57,12 @@ public class ArticleService {
         return entityManager.createQuery(sql, Article.class)
                 .setMaxResults(limit)
                 .getResultList();
+    }
+
+    public Page<Article> getPage(int offset, int limit) {
+        Pageable pageable = PageRequest.of(offset, limit, Sort.by(Sort.Direction.DESC, "createdAt"));
+        Page<Article> articles = repository.findAll(pageable);
+        return articles;
     }
 
     public List<Article> search(String keyword) {

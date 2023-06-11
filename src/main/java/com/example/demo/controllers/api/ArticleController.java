@@ -17,9 +17,8 @@ public class ArticleController {
     private ArticleService service;
 
     @GetMapping(path = "latest")
-    public Iterable<Article> latest() {
-        return service.getLatest(5);
-        // return null;
+    public Iterable<Article> latest(int limit) {
+        return service.getLatest(limit);
     }
 
     @GetMapping(path = "all")
