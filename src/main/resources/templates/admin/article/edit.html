@@ -1,7 +1,7 @@
 <div layout:decorate="layouts/admin" layout:fragment="contents">
   <h2>ニュース</h2>
   <div class="mb-3">
-    <form th:action="@{/admin/article/update/{id}(id=${article.id})}" method="post" th:object="${article}"
+    <form th:action="@{/admin/article/update/{id}(id=${id})}" method="post" th:object="${article}"
       enctype="multipart/form-data">
 
       <div class="form-group mb-3">

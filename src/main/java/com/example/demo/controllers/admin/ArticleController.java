@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Article;
@@ -32,68 +33,84 @@ public class ArticleController {
     private ArticleService service;
 
     @GetMapping("")
-    public String index(Model model) {
+    public ModelAndView index(Model model, ModelAndView view) {
         List<Article> articles = service.getAll();
         model.addAttribute("articles", articles);
-        return "admin/article/index";
+        view.setViewName("admin/article/index");
+        return view;
     }
 
     @GetMapping("create")
-    public String create(@ModelAttribute("form") Article form, Model model) {
+    public ModelAndView create(
+            @ModelAttribute("form") Article form,
+            Model model,
+            ModelAndView view) {
+        // System.out.println("title:" + form.getTitle());
         model.addAttribute("article", form);
-        return "admin/article/create";
+        view.setViewName("admin/article/create");
+        return view;
     }
 
     @PostMapping("add")
-    public String add(@Valid @ModelAttribute("form") Article form, BindingResult bindingResult,
-            RedirectAttributes redirectAttributes, Model model,
+    public ModelAndView add(
+            @Valid @ModelAttribute("form") Article form,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
+            Model model,
+            ModelAndView view,
             @RequestParam("file") MultipartFile filePart) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("form", form);
+            // redirectAttributes.addFlashAttribute("form", form);
+            // view.setViewName("redirect:/admin/article/create");
             model.addAttribute("article", form);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.article",
-                    bindingResult);
-            return "admin/article/create";
-            // return "redirect:/admin/article/create";
+            view.setViewName("admin/article/create");
         } else {
             Article article = service.create(form);
             service.uploadImage(article, filePart);
-            return "redirect:/admin/article/";
+            view.setViewName("redirect:/admin/article/");
         }
+        return view;
     }
 
     @GetMapping("edit/{id}")
-    public String edit(@PathVariable("id") Long id, Model model) {
+    public ModelAndView edit(
+            @PathVariable("id") Long id,
+            Model model,
+            ModelAndView view) {
         Article article = service.getById(id);
         model.addAttribute("article", article);
-        return "admin/article/edit";
+        view.setViewName("admin/article/edit");
+        return view;
     }
 
     @PostMapping("update/{id}")
-    public String update(
+    public ModelAndView update(
             @PathVariable("id") Long id,
             @Valid @ModelAttribute Article form,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             Model model,
+            ModelAndView view,
             @RequestParam("file") MultipartFile filePart) {
+        model.addAttribute("id", id);
         if (bindingResult.hasErrors()) {
             model.addAttribute("article", form);
-            return "/admin/article/edit";
+            System.out.println("Error!!!!");
+            view.setViewName("admin/article/edit");
             // redirectAttributes.addFlashAttribute("form", form);
-            // redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.article",
-            // bindingResult);
-            // return "redirect:/admin/article/edit/" + id;
+            // view.setViewName("redirect:/admin/article/edit/" + id);
         } else {
             Article article = service.update(id, form);
             service.uploadImage(article, filePart);
-            return "redirect:/admin/article/";
+            view.setViewName("redirect:/admin/article/");
         }
+        return view;
     }
 
     @PostMapping("destroy/{id}")
-    public String destroy(@PathVariable("id") Long id) {
+    public ModelAndView destroy(@PathVariable("id") Long id, ModelAndView view) {
         service.delete(id);
-        return "redirect:/admin/article/";
+        view.setViewName("redirect:/admin/article/");
+        return view;
     }
 }

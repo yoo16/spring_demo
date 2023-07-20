@@ -27,14 +27,9 @@ public class ArticleController {
 
         Page<Article> articles = service.getPage(pageable, ARTICLE_LIMIT);
 
-        int currentPage = articles.getPageable().getPageNumber();
-        int totalPage = articles.getTotalPages();
-
-        articles.isLast();
-
         model.addObject("articles", articles);
-        model.addObject("currentPage", currentPage);
-        model.addObject("totalPage", totalPage);
+        model.addObject("currentPage", articles.getPageable().getPageNumber());
+        model.addObject("totalPage", articles.getTotalPages());
         model.setViewName("article/index");
         return model;
     }

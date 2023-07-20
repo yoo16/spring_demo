@@ -15,23 +15,23 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.formLogin(login -> login
-                .loginProcessingUrl("/auth")
-                .loginPage("/login")
-                .defaultSuccessUrl("/admin/")
-                .failureUrl("/login?error")
-                .permitAll()
-        ).logout(logout -> logout
-                .logoutSuccessUrl("/")
-        ).authorizeHttpRequests(authz -> authz
-                // static contents
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/admin/**").authenticated()
-                .anyRequest().permitAll()
-                // .requestMatchers("/admin").hasRole("ADMIN")
-                // .requestMatchers("/", "/hello/**", "/article/**", "/api/article/**").permitAll()
-                // .anyRequest().authenticated()
-        );
+        // http.formLogin(login -> login
+        //         .loginProcessingUrl("/auth")
+        //         .loginPage("/login")
+        //         .defaultSuccessUrl("/admin/")
+        //         .failureUrl("/login?error")
+        //         .permitAll()
+        // ).logout(logout -> logout
+        //         .logoutSuccessUrl("/")
+        // ).authorizeHttpRequests(authz -> authz
+        //         // static contents
+        //         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+        //         .requestMatchers("/admin/**").authenticated()
+        //         .anyRequest().permitAll()
+        //         // .requestMatchers("/admin").hasRole("ADMIN")
+        //         // .requestMatchers("/", "/hello/**", "/article/**", "/api/article/**").permitAll()
+        //         // .anyRequest().authenticated()
+        // );
         return http.build();
     }
 

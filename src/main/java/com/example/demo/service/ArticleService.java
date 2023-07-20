@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -66,7 +67,8 @@ public class ArticleService {
 
     public Page<Article> getPage(Pageable pageable, int limit) {
         int offset = pageable.getPageNumber() - 1;
-        if (offset < 0) offset = 0;
+        if (offset < 0)
+            offset = 0;
         pageable = PageRequest.of(offset, limit, Sort.by(Sort.Direction.DESC, "createdAt"));
         Page<Article> articles = repository.findAll(pageable);
         return articles;
@@ -94,12 +96,15 @@ public class ArticleService {
     }
 
     public Article update(Long id, Article form) {
-        Article article = modelMapper.map(getById(id), Article.class);
-
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        article.setUpdatedAt(now);
-
-        repository.saveAndFlush(article);
+        Article article = modelMapper.map(form, Article.class);
+        try {
+            // Article article = modelMapper.map(getById(id), Article.class);
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            article.setUpdatedAt(now);
+            repository.save(form);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return article;
     }
 
