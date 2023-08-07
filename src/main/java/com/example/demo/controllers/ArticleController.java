@@ -35,12 +35,15 @@ public class ArticleController {
     }
 
     @GetMapping("/article/{id}")
-    public ModelAndView detail(@PathVariable("id") Long id, ModelAndView model) {
-        Article article = service.getById(id);
-        model.addObject("article", article);
-        model.setViewName("article/detail");
-        return model;
+    public String detail(@PathVariable("id") Long id) {
+        return "article/sample";
     }
+    // public ModelAndView detail(@PathVariable("id") Long id, ModelAndView model) {
+    //     Article article = service.getById(id);
+    //     model.addObject("article", article);
+    //     model.setViewName("article/detail");
+    //     return model;
+    // }
 
     @GetMapping("/article/search")
     public String search(@RequestParam("keyword") String keyword) {
