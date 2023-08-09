@@ -36,8 +36,10 @@ public class ArticleController {
 
     @GetMapping("/article/{id}")
     public String detail(@PathVariable("id") Long id) {
+        System.out.println("article id: " + id);
         return "article/sample";
     }
+    // @GetMapping("/article/{id}")
     // public ModelAndView detail(@PathVariable("id") Long id, ModelAndView model) {
     //     Article article = service.getById(id);
     //     model.addObject("article", article);
