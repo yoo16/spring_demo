@@ -1,14 +1,15 @@
 <main layout:decorate="layouts/default" layout:fragment="contents">
   <div>
-    <img th:src="@{images/tokyo_station.jpg}" class="img-fluid">
-  </div>
-  <div>
-    <h1 class="p-3" th:text="${message}"></h1>
+    <h1 class="p-3" th:text="${title}"></h1>
     <h2>最新ニュース</h2>
-    <ul>
-      <li th:each="article: ${articles}" class="mb-2">
-        <a th:href="@{/article/{id}(id=${article.id})}" th:text="${article.title}"></a>
-      </li>
-    </ul>
+
+    <div>
+      <h3>ニュース一覧</h3>
+      <ul>
+        <li th:each="article: ${articles}" class="mb-2">
+          <a th:href="@{/article/{id}(id=${article.id})}" th:text="${article.title}"></a>
+        </li>
+      </ul>
+    </div>
   </div>
 </main>

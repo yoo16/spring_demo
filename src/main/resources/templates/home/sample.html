@@ -1,15 +1,14 @@
 <main layout:decorate="layouts/default" layout:fragment="contents">
   <div>
-    <h2>最新ニュース</h2>
+    <h1 class="pt-3 pb-3" th:text="${title}"></h1>
     <div>
       <h3>ニュースタイトル1</h3>
       <p>
         <span>2023/07/01 13:15</span>
       </p>
-    </div>
-
-    <div class="mb-3">
-      <img src="/images/tokyo_station.jpg" width="500">
+      <div class="mb-3">
+        <img src="/images/tokyo_station.jpg" width="500">
+      </div>
     </div>
 
     <div>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,17 +21,23 @@ public class HomeController {
 
     @GetMapping("/")
     // @ResponseBody
-    public String index() {
-        return "home/sample";
-    }
-    // public ModelAndView index(ModelAndView model) {
-    //     String message = "Welcome、News Site!";
-    //     model.addObject("message", message);
-
-    //     List<Article> articles = service.getLatest(10);
-    //     model.addObject("articles", articles);
-    //     model.setViewName("home/index");
-    //     return model;
+    // public String index() {
+    //     return "home/sample";
     // }
+    // public String index(Model model) {
+    //     String title = "My News";
+    //     model.addAttribute("title", title);
+    //     return "home/sample";
+    // }
+
+    public ModelAndView index(ModelAndView model) {
+        String title = "My News";
+        model.addObject("title", title);
+
+        // List<Article> articles = service.getLatest(10);
+        // model.addObject("articles", articles);
+        model.setViewName("home/index");
+        return model;
+    }
 
 }
