@@ -1,5 +1,7 @@
 package com.example.demo.controllers.admin;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -92,7 +94,9 @@ public class ArticleController {
             Model model,
             ModelAndView view,
             @RequestParam("file") MultipartFile filePart) {
+
         model.addAttribute("id", id);
+        System.out.println(form.getPostedAt());
         if (bindingResult.hasErrors()) {
             model.addAttribute("article", form);
             System.out.println("Error!!!!");
