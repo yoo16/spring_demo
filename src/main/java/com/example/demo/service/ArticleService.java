@@ -67,7 +67,7 @@ public class ArticleService {
         int offset = pageable.getPageNumber() - 1;
         if (offset < 0)
             offset = 0;
-        pageable = PageRequest.of(offset, limit, Sort.by(Sort.Direction.DESC, "createdAt"));
+        pageable = PageRequest.of(offset, limit, Sort.by(Sort.Direction.DESC, "postedAt"));
         Page<Article> articles = repository.findAll(pageable);
         return articles;
     }

@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS articles (
     title varchar(255) NOT NULL,
     body TEXT NOT NULL,
     image_path varchar(255) DEFAULT NULL,
+    posted_at datetime NOT NULL,
     created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at datetime NULL DEFAULT NULL
 );

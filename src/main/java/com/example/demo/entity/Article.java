@@ -1,14 +1,11 @@
 package com.example.demo.entity;
 
-import java.text.DateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -54,11 +51,6 @@ public class Article extends AbstractEntity {
 
     public LocalDateTime getPostedAt() {
         return postedAt;
-    }
-
-    public String showDatetime() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy MM dd");
-        return postedAt.format(dtf);
     }
 
     public void setPostedAt(LocalDateTime postedAt) {

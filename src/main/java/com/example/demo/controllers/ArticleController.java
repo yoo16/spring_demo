@@ -15,7 +15,7 @@ import com.example.demo.service.ArticleService;
 @Controller
 public class ArticleController {
 
-    private final int ARTICLE_LIMIT = 5;
+    private final int ARTICLE_LIMIT = 10;
 
     @Autowired
     private ArticleService service;
@@ -28,8 +28,10 @@ public class ArticleController {
         Page<Article> articles = service.getPage(pageable, ARTICLE_LIMIT);
 
         model.addObject("articles", articles);
-        model.addObject("currentPage", articles.getPageable().getPageNumber());
+        model.addObject("currentPage", articles.getPageable().getPageNumber() + 1);
         model.addObject("totalPage", articles.getTotalPages());
+
+        System.out.println(articles.getPageable().getPageNumber());
         model.setViewName("article/index");
         return model;
     }

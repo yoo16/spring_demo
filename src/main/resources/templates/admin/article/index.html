@@ -4,7 +4,7 @@
   <table class="table">
     <tr th:each="article: *{articles}">
       <td><a th:href="@{/admin/article/edit/{id}(id=${article.id})}" class="btn btn-sm btn-outline-primary">編集</a></td>
-      <td th:text="${#temporals.format(article.postedAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
+      <td th:text="${#temporals.format(article.postedAt, 'yyyy/MM/dd HH:mm')}"></td>
       <td th:text="*{article.title}"></td>
     </tr>
   </table>
