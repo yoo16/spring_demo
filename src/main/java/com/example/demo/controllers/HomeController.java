@@ -34,8 +34,8 @@ public class HomeController {
         String title = "My News";
         model.addObject("title", title);
 
-        // List<Article> articles = service.getLatest(10);
-        // model.addObject("articles", articles);
+        List<Article> articles = service.getLatest(10);
+        model.addObject("articles", articles);
         model.setViewName("home/index");
         return model;
     }

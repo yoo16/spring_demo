@@ -1,7 +1,4 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS articles;
-
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id bigint PRIMARY KEY AUTO_INCREMENT,
     name varchar(255) NOT NULL,
     email varchar(255) UNIQUE NOT NULL,
@@ -12,7 +9,7 @@ CREATE TABLE users (
     updated_at datetime NULL DEFAULT NULL
 );
 
-CREATE TABLE articles (
+CREATE TABLE IF NOT EXISTS articles (
     id bigint PRIMARY KEY AUTO_INCREMENT,
     title varchar(255) NOT NULL,
     body TEXT NOT NULL,

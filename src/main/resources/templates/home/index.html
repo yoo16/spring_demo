@@ -7,7 +7,7 @@
       <h3>ニュース一覧</h3>
       <ul>
         <li th:each="article: ${articles}" class="mb-2">
-          <a th:href="@{/article/{id}(id=${article.id})}" th:text="${article.title}"></a>
+          <a th:href="@{/article/{id}(id=*{article.id})}" th:text="${article.title}"></a>
         </li>
       </ul>
     </div>

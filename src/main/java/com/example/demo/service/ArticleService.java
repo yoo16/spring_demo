@@ -4,7 +4,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -87,25 +86,24 @@ public class ArticleService {
 
     public Article create(Article form) {
         Article article = modelMapper.map(form, Article.class);
-
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        article.setCreatedAt(now);
         repository.saveAndFlush(article);
         return article;
     }
 
     public Article update(Long id, Article form) {
-        Article article = modelMapper.map(form, Article.class);
+        Article existingArticle = repository.findById(id).get();
         try {
-            // Article article = modelMapper.map(getById(id), Article.class);
-            Timestamp now = new Timestamp(System.currentTimeMillis());
-            article.setUpdatedAt(now);
-            repository.save(form);
+            //TODO
+            modelMapper.map(form, existingArticle);
+            existingArticle = repository.save(existingArticle);
         } catch (Exception e) {
             System.out.println(e);
         }
-        return article;
+        return existingArticle;
     }
+
+
+
 
     public void delete(Long id) {
         repository.deleteById(id);
@@ -120,6 +118,9 @@ public class ArticleService {
                 String ext = fileName.split("\\.")[1];
                 String imageFilePath = imageDir + article.getId() + "." + ext;
                 Path filePath = Paths.get(imageFilePath);
+                System.out.println(article.getId());
+                System.out.println(fileName);
+                System.out.println(imageFilePath);
 
                 // TODO: config & method
                 String publicImagePath = "/images/article/" + article.getId() + "." + ext;
