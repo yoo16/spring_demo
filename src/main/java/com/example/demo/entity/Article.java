@@ -13,15 +13,17 @@ import jakarta.validation.constraints.NotNull;
 @Table(name = "articles")
 public class Article extends AbstractEntity {
 
-    @NotBlank(message = "タイトルを入力してください")
+    // @NotBlank(message = "タイトルを入力してください")
+    @Column(nullable = false)
     private String title;
 
-    @NotBlank(message = "本文を入力してください")
+    // @NotBlank(message = "本文を入力してください")
+    @Column(nullable = false)
     private String body;
     private String imagePath;
 
-    @NotNull(message = "日付を入力してください")
-    @Column(name = "posted_at", columnDefinition = "TIMESTAMP")
+    // @NotNull(message = "日付を入力してください")
+    @Column(columnDefinition = "TIMESTAMP", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime postedAt;
 

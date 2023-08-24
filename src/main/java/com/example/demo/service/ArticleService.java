@@ -39,7 +39,7 @@ public class ArticleService {
 
     public List<Article> getAll() {
         return repository.findAll(
-                Sort.by(Sort.Direction.DESC, "createdAt"));
+                Sort.by(Sort.Direction.DESC, "postedAt"));
     }
 
     public Article getById(Long id) {
@@ -52,7 +52,7 @@ public class ArticleService {
     }
 
     public List<Article> getLatest(int limit) {
-        String sql = "SELECT e FROM Article e ORDER BY e.createdAt DESC";
+        String sql = "SELECT e FROM Article e ORDER BY e.postedAt DESC";
         return entityManager.createQuery(sql, Article.class)
                 .setMaxResults(limit)
                 .getResultList();
@@ -93,7 +93,6 @@ public class ArticleService {
     public Article update(Long id, Article form) {
         Article existingArticle = repository.findById(id).get();
         try {
-            //TODO
             modelMapper.map(form, existingArticle);
             existingArticle = repository.save(existingArticle);
         } catch (Exception e) {

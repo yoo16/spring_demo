@@ -10,15 +10,15 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 
 @MappedSuperclass
-public class AbstractEntity {
+public abstract class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "created_at")
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp createdAt;
 
-    @Column(name = "updated_at")
+    @Column(columnDefinition = "TIMESTAMP")
     private Timestamp updatedAt;
 
     public Long getId() {
