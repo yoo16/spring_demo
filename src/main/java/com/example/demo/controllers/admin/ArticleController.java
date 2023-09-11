@@ -34,8 +34,8 @@ public class ArticleController {
 
     @GetMapping("")
     public ModelAndView index(Model model, ModelAndView view) {
-        List<Article> articles = service.getAll();
-        model.addAttribute("articles", articles);
+        // List<Article> articles = service.getAll();
+        // model.addAttribute("articles", articles);
         view.setViewName("admin/article/index");
         return view;
     }
@@ -46,7 +46,7 @@ public class ArticleController {
             Model model,
             ModelAndView view) {
         // System.out.println("title:" + form.getTitle());
-        model.addAttribute("article", form);
+        // model.addAttribute("article", form);
         view.setViewName("admin/article/create");
         return view;
     }
@@ -59,6 +59,7 @@ public class ArticleController {
             Model model,
             ModelAndView view,
             @RequestParam("file") MultipartFile filePart) {
+        System.out.println("Add!!");
         if (bindingResult.hasErrors()) {
             // redirectAttributes.addFlashAttribute("form", form);
             // view.setViewName("redirect:/admin/article/create");
@@ -77,6 +78,7 @@ public class ArticleController {
             @PathVariable("id") Long id,
             Model model,
             ModelAndView view) {
+        System.out.println(id);
         Article article = service.getById(id);
         model.addAttribute("article", article);
         view.setViewName("admin/article/edit");

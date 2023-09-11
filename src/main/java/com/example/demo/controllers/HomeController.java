@@ -19,7 +19,7 @@ public class HomeController {
     @Autowired
     private ArticleService service;
 
-    @GetMapping("/")
+    // @GetMapping("/")
     // @ResponseBody
     // public String index() {
     //     return "home/sample";
@@ -30,14 +30,20 @@ public class HomeController {
     //     return "home/sample";
     // }
 
-    public ModelAndView index(ModelAndView model) {
+    @GetMapping("/")
+    public ModelAndView index(ModelAndView view) {
         String title = "My News";
-        model.addObject("title", title);
+        view.addObject("title", title);
 
         List<Article> articles = service.getLatest(10);
-        model.addObject("articles", articles);
-        model.setViewName("home/index");
-        return model;
+        view.addObject("articles", articles);
+        view.setViewName("home/index");
+        return view;
     }
 
+    @GetMapping("/cancel")
+    public ModelAndView cancel(ModelAndView view) {
+        view.setViewName("redirect:/");
+        return view;
+    }
 }

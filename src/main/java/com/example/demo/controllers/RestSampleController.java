@@ -7,13 +7,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RestSampleController {
-    @GetMapping("/hello")
-    public String index(@RequestParam(name = "name", required = false) String name) {
-        String message = "Hello, " + name;
+
+    @GetMapping(value = "/hello")
+    public String index() {
+        return "This is Sample Controller!!";
+    }
+
+    @GetMapping(value = "/bye")
+    // public String bye(@RequestParam String param) {
+    public String bye(@RequestParam(name = "name", required = false) String param) {
+        String message = "Bye!" + param;
         return message;
     }
 
-    @GetMapping("/users/{userId}")
+    @GetMapping(value = "/users/{userId}")
     public String getUserById(@PathVariable Long userId) {
         String message = "User id is " + userId + "!";
         return message;
